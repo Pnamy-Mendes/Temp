@@ -1,0 +1,57 @@
+<div>
+  <ol class="breadcrumb">
+    <li>
+        <i class="fa fa-dashboard"></i>  <a href="/">Dashboard</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-cogs"></i> Definições
+    </li>
+  </ol>
+
+  <div class="page-title">
+      <div class="title_left">
+          <h3>Definições - Alterar Password</h3>
+      </div>
+  </div>
+
+  <div class="col-lg-6 col-md-6 col-lg-push-3 col-md-push-3" ng-repeat="user in users">
+
+  <button ng-disabled="FormUser.$invalid" class="btn enviar" ng-click="EditPasswordOnly(user)"><i class="fa fa-save"></i></button>
+
+
+  <form name="FormUser">
+          <input type="hidden" class="form-control" id="input0" ng-model="user.ID">
+          <input type="hidden" class="form-control" id="inputx1" ng-model="user.TipoUserID">
+         
+
+          <div class="form-group">
+           <br>
+            <label for="input1" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="input1" ng-model="user.Nome" required disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="input2" class="form-label">Email</label>
+            <input type="email" class="form-control" id="input2" ng-model="user.Email" required disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="check1" class="form-label">Password Antiga</label>
+            <input type="password" class="form-control" id="check1" required ng-model="user.oldpass">
+          </div>
+
+          <div class="form-group">
+            <label for="check1" class="form-label">Nova Password</label>
+            <input type="password" class="form-control" id="check1" required ng-model="user.newpass">
+          </div>
+
+          <div class="form-group">
+            <label for="check2" class="form-label">Confirmar Password</label>
+            <input type="password" class="form-control" id="check2" required ng-model="user.cfnewpass">
+          </div>
+
+        </form>
+
+      </div>
+
+</div>

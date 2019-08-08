@@ -1,0 +1,80 @@
+<div class="modal-header" >
+
+  <div class="modal-title">
+    {{titulo}} Utilizador
+
+  </div>
+</div>
+<div class="modal-body">
+
+  <form name="FormUser">
+          <input type="hidden" class="form-control" id="input0" ng-model="user.ID">
+
+          <div class="form-group">
+           <div class="checkbox checkbox-warning" style="float:right;" >
+                <input id="checkbox106" type="checkbox" ng-true-value="1" ng-false-value="2" ng-model="user.TipoUserID">
+                <label for="checkbox106"> Conceder acesso como Administrador </label>
+           </div>
+                <span ng-if="user.TipoUserID==1" ng-init="user.TipoUser='Administrador'"></span>
+                <span ng-if="user.TipoUserID==2" ng-init="user.TipoUser='Utilizador' "></span>
+           <br>
+            <label for="input1" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="input1" ng-model="user.Nome" required >
+          </div>
+
+          <div class="form-group">
+            <label for="input2" class="form-label">Email</label>
+            <input type="email" class="form-control" id="input2" ng-model="user.Email" >
+          </div>
+
+          <div ng-if="titulo == 'Editar'">
+
+            <div class="radio" ng-init="model.changePassword=false">
+              <div class="radio radio-warning radio-inline">
+                <input ng-model="model.changePassword" type="radio" id="inlineRadio2" ng-value="true" name="radioInline">
+                <label for="inlineRadio2"> Mudar Password   </label>
+              </div>
+              <div class="radio radio-inline">
+                <input ng-model="model.changePassword" type="radio" id="inlineRadio1" ng-value="false" name="radioInline">
+                <label for="inlineRadio1"> Manter Password  </label>
+              </div>
+            </div>
+
+            <br>
+
+            <div ng-if="model.changePassword" >
+
+              <div class="form-group">
+                <label for="check1" class="form-label">Nova Password</label>
+                <input type="password" class="form-control" id="check1" required ng-model="user.newpass">
+              </div>
+
+              <div class="form-group">
+                <label for="check2" class="form-label">Confirmar Password</label>
+                <input type="password" class="form-control" id="check2" required ng-model="user.cfnewpass">
+              </div>
+            </div>
+
+        </div>
+
+
+        <div ng-if="titulo != 'Editar'" >
+          <div class="form-group">
+            <label for="check1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="check1" required ng-model="user.pass">
+          </div>
+
+          <div class="form-group">
+            <label for="check2" class="form-label">Confirmar Password</label>
+            <input type="password" class="form-control" id="check2" required ng-model="user.cfpass">
+          </div>
+        </div>
+
+        </form>
+
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-danger btn-sm" ng-click="cancel()"><i class="fa fa-times"></i> Fechar</button>
+  <button ng-disabled="FormUser.$invalid" class="btn btn-sm btn-primary" ng-click="ok()"><i class="fa fa-save"></i> Editar</button>
+</div>

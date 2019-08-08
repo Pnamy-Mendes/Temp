@@ -1,0 +1,13 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: cdestarr_atletas
+    database_user: cdestarr_atletas
+    database_password: BOLAperdida16
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 13cd996a93ad926b99e998ff974d28b2a977aa22
+    upload_dir: '%kernel.root_dir%/../FILES/'

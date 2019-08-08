@@ -1,0 +1,107 @@
+<div ng-include="'templates/page-header.html'"></div>
+
+
+<div class="panel">
+
+  <div class="panel-title">
+    <div class="row">
+      <div class="col-md-6">
+        <b>Atleta</b>
+      </div>
+      <div class="col-md-4 col-md-offset-2">
+
+        <button ng-if="userRole==='ROLE_ADMIN'" class="btn btn-danger btn-sm" ng-click="deleteEntidade(listaentidade, tipo)">
+          <i class="fa fa-trash"></i> Apagar</button>
+
+        <button ng-if="userRole==='ROLE_ADMIN'" class="btn btn-default btn-sm" ui-sref="EDIToutrasEntidades({entidadeID: listaentidade.ID})" >
+          <i class="fa fa-edit"></i> Editar</button>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+<!-- Nav tabs -->
+<uib-tabset >
+
+  <!-- TAB Dados Pessoais....................................................................................... -->
+  <uib-tab index="0" heading="Dados Pessoais">
+   <div class="row">
+     <div class="col-md-2">
+       <div class="imgUpload"> <img ng-src="img/{{listaentidade.FotoInscricao}}" id="perfilFoto"></div>
+</div>
+
+    <div class="col-md-5">
+
+        <p><b>Estado:</b>
+          <span ng-class="{'InfoInativo': listaentidade.Estado == 'Inativo'}">{{listaentidade.Estado}}</span>
+        </p>
+
+        <p><b>Nome: </b>{{listaentidade.Nome}}</p>
+        <p><b>País: </b>{{listaentidade.Pais}}</p>
+        <p><b>Naturalidade: </b>{{listaentidade.Naturalidade}}</p>
+        <p><b>Data de Nascimento: </b>{{listaentidade.DataNasc}}</p>
+
+        <p><b>CC: </b>{{listaentidade.CC}}</p>
+        <p><b>NIF: </b>{{listaentidade.NIF}}</p>
+
+        <p><b>Habilitações: </b>{{listaentidade.Habilitacoes}}</p>
+        <p><b>Profissão: </b>{{listaentidade.Profissao}}</p>
+      </div>
+
+      <div class="col-md-5">
+
+        <p><b>Telefone: </b>{{listaentidade.Telf}}</p>
+        <p><b>Telemóvel: </b>{{listaentidade.Telm}}</p>
+        <p><b>Email: </b>{{listaentidade.Email}}</p>
+        <p><b>Morada: </b>{{listaentidade.Morada_Rua}}, {{listaentidade.Morada_Numero}}
+          <span ng-if="listaentidade.Morada_Andar">( {{listaentidade.Morada_Andar}}º Andar)</b>
+        <p><b>Localidade: </b>
+        {{listaentidade.Morada_CodPostal4}}-{{listaentidade.Morada_CodPostal3}}
+        {{listaentidade.Morada_Localidade}} </p>
+      </div>
+   </div>
+  </uib-tab>
+
+
+  <!-- TAB Dados Desportivos....................................................................................... -->
+  <uib-tab index="1" heading="Dados Desportivos">
+   <div class="row">
+
+
+      <p><b>Escalões pelos quais responsável: </b></p>
+
+          <div ng-repeat="escResponsavel in listaentidade.EscaloesResp">
+            <p>{{escResponsavel}}</p>
+          </div>
+
+
+   </div>
+  </uib-tab>
+
+  <!-- TAB Dados Inscrição....................................................................................... -->
+  <uib-tab index="2" heading="Dados Inscrição" ng-if="2==1">
+   <div>
+      vazio
+   </div>
+  </uib-tab>
+
+  <!-- TAB Cromos....................................................................................... -->
+  <uib-tab index="3" heading="Cromos" ng-if="2==1">
+   <div>
+      vazio
+   </div>
+  </uib-tab>
+
+
+</uib-tabset>
+
+
+  <div class="botline">
+    <p><span class="contactspan"><b>Ultima Atualização:</b> </b>{{listaentidade.UltimaAtualizacao}}</p>
+  </div>
+
+ </div>

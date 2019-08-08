@@ -1,0 +1,75 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">  {{titulo}}</h3>
+</div>
+
+  <div class="modal-body" id="modal-body">
+    <form editable-form class="form-inline form-buttons well well-sm color3-bg" name="addPagamentoForm" ng-show="addPagamentoForm.$visible">
+      <h5>Adicionar pagamento</h5><br />
+      <label>Descrição:</label><input type="text" placeholder="descrição" name="descricao" ng-model="new.Descricao" class="form-control input-sm" />
+      <label>Valor:</label><input type="text" placeholder="valor" name="valor" ng-model="new.Valor" class="form-control input-sm" />
+      <label>Data Limite:</label><input type="text" placeholder="data limite" name="DataLimite" ng-model="new.DataLimite" class="form-control input-sm" />
+      <label>Valor Pós Limite:</label><input type="text" placeholder="valor p/ lim." name="valorPostLimite" ng-model="new.ValorPosLimite" class="form-control input-sm" />
+      <label>Benificio:</label><input type="checkbox" placeholder="benificio" name="descricao" ng-model="new.Benificio" class="form-control input-sm" />
+      <label>Descricao Benificio:</label><input type="text" placeholder="descrição benificio" name="DescricaoBenificio" ng-model="new.DescricaoBenificio" class="form-control input-sm" />
+      <button type="button" class="btn btn-sm btn-primary" ng-click=addPagamento()>Guardar</button>
+      <button type="button" class="btn btn-sm btn-danger" ng-click="addPagamentoForm.$cancel()">Cancelar</button>
+    </form>
+    <button type="button" class="btn btn-sm btn-primary" ng-click="addPagamentoForm.$show()" ng-show="!addPagamentoForm.$visible">Adicionar Pagamento</button>
+
+    <table class="table table-striped">
+      <thead>
+          <tr><th>desc</th> <th>valor</th> <th>limite<br />(dd-mm-yyyy)</th><th>valor p/ lim.</th>  <th>beneficio</th> <th></th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="pagamento in pagamentos">
+          <td>
+            <span editable-text="pagamento.Descricao" e-name="Descricao" e-form="rowform">
+              {{pagamento.Descricao}}
+            </span>
+          </td>
+          <td>
+            <span editable-text="pagamento.Valor" e-name="Valor" e-form="rowform">
+              {{pagamento.Valor}}
+            </span>
+            </td>
+          <td>
+            <span editable-text="pagamento.DataLimite" e-name="DataLimite" e-form="rowform">
+              {{ pagamento.DataLimite }}
+            </span>
+          </td>
+          <td>
+            <span editable-text="pagamento.ValorPosLimite" e-name="ValorPosLimite" e-form="rowform">
+              {{pagamento.ValorPosLimite || 'n/d' }}
+            </span>
+          </td>
+          <td>
+            <span editable-checkbox="pagamento.Benificio" e-title="Beneficio" e-form="rowform">
+              <span ng-if="pagamento.Benificio"><i class="fa fa-check color7"></i></span><span ng-if="!pagamento.Benificio"><i class="fa fa-times color10"></i></span>
+            </span>
+
+          </td>
+          <td>
+            <span editable-text="pagamento.DescricaoBenificio" e-name="DescricaoBenificio" e-form="rowform">
+              {{pagamento.DescricaoBenificio}}
+            </span>
+          </td>
+          <td>
+            <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == pagamento">
+              <button type="button" ng-disabled="rowform.$waiting" class="btn btn-sm btn-primary" ng-click="editarPagamento(rowform, pagamento.ID_Pagamento)">save</button>
+              <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-sm btn-default">cancel</button>
+            </form>
+            <div class="buttons" ng-show="!rowform.$visible">
+              <button type="button" class="btn btn-sm btn-primary" ng-click="rowform.$show()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
+              <button type="button" class="btn btn-sm btn-danger" ng-click="removePagamento(pagamento)"><i class="fa fa-times" aria-hidden="true"></i> Remover</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+<div class="modal-footer">
+<!--  <button class="btn btn-default btn-sm" ng-click="ok()"><i class="fa fa-trash"></i> Guardar</button>-->
+  <button class="btn btn-info btn-sm" ng-click="cancel()"><i class="fa fa-times"></i> Fechar</button>
+  </div>

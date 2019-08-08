@@ -1,0 +1,35 @@
+<div id="top" class="grad-orange clearfix">
+
+    <div class="applogo" ng-class="{'open-sidebar' : sidebarClosed }">
+        <a href="#/home" class="logo">
+            <img class="logoMenuD" src="./img/logoNew2D.png">&nbsp;<img class="logoMenuText" src="./img/logoNew2Text.png">
+        </a>
+        <div class="img-logo">
+            <img class="logoMenuD" src="./img/logoNew2D.png">
+        </div>
+    </div>
+    
+	<span class="sidebar-open-button cursor pointer" ng-click="showSidebar()"><i class="fa fa-bars"></i></span>
+
+    <!-- Start App Logo -->
+    <!-- <div class="applogo"> -->
+        <!-- <a href="#" class="logo">dashsoccer</a> -->
+        <!-- <img class="logoMenuD" src="../img/logoNew2D.png">&nbsp;<img class="logoMenuText" src="../img/logoNew2Text.png">
+    </div> -->
+    <!-- End App Logo -->
+
+    <!-- Start Sidebar Show Hide Button -->
+    <!-- <a ng-click="openSidebar()" class="sidebar-open-button"><i class="fa fa-bars"></i></a>
+    <a ng-click="openSidebar()" class="sidebar-open-button-mobile"><i class="fa fa-bars"></i></a> -->
+    <!-- End Sidebar Show Hide Button -->
+    <ul class="top-right">
+        <li class="dropdown link">
+            <a ng-click="openUser()" data-toggle="dropdown" class="dropdown-toggle profilebox pointer"><!-- <img src="img/profileimg.png" alt="img"> --><b>{{userNome}}</b><span class="caret"></span></a>
+            <ul ng-class="showuser" class="dropdown-menu dropdown-menu-list dropdown-menu-right">
+                <li><a ui-sref="definicoes"><i class="fa fa-cogs"></i>Definições</a></li>
+                <li><a href="logout"><i class="fa fa-power-off"></i> Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+    <!-- End Top Right -->
+</div>

@@ -1,0 +1,240 @@
+<div ng-include="'templates/page-header.html'"></div>
+
+<div class="panel">
+
+    <div class="panel-title">
+        <div class="row">
+            <div class="col-md-6">
+                <b ng-if="listaentidade.ID">Editar</b>
+                <b ng-if="!listaentidade.ID">Novo</b>
+                <b>{{titulo}}</b>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <button ng-if="listaentidade.ID" class="btn btn-danger btn-sm" ui-sref="outrasEntidadesPerfil({entidadeID: listaentidade.ID})">
+                <i class="fa fa-arrow-left"></i> Voltar
+            </button>
+
+            <button ng-if="!listaentidade.ID" class="btn btn-danger btn-sm" ui-sref="outrasEntidades({tipoEnt: tipo})">
+                <i class="fa fa-arrow-left"></i> Voltar
+            </button>
+
+            <button ng-if="listaentidade.ID" ng-disabled="FormEnt.$invalid" class="btn btn-sm" ng-click="editarEntidade(listaentidade)">
+                <i class="fa fa-save"></i> Guardar
+            </button>
+
+            <button ng-if="!listaentidade.ID" ng-disabled="FormEnt.$invalid" class="btn btn-sm" ng-click="novaEntidade(listaentidade, tipo)">
+                <i class="fa fa-save"></i> Guardar
+            </button>
+
+        </div>
+        <div class="col-md-6">
+
+                <div ng-init="listaentidade.EstadoID = listaentidade.EstadoID == null ? 1 : listaentidade.EstadoID">
+
+                    <div class="radio">
+                        <div class="radio radio-inline">
+                            <input ng-model="listaentidade.EstadoID" type="radio" id="inlineRadio2" ng-value="0" name="radioInline">
+                            <label for="inlineRadio2"> Inativo   </label>
+                        </div>
+                        <div class="radio radio-warning radio-inline">
+                            <input ng-model="listaentidade.EstadoID" type="radio" id="inlineRadio1" ng-value="1" name="radioInline">
+                            <label for="inlineRadio1"> Ativo  </label>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+    </div>
+
+
+        <form name="FormEnt" class="form-horizontal">
+            <!-- Nav tabs -->
+            <uib-tabset>
+
+                <!-- TAB Dados Pessoais....................................................................................... -->
+                <uib-tab index="0" heading="Dados Pessoais">
+                    <div class="row">
+
+                        <div class="col-md-2" ng-if="listaentidade.ID">
+
+                            <file-upload id="{{listaentidade.ID}}" model="listaentidade.FotoInscricao" ng-if="listaentidade.ID"></file-upload>
+
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Nome:</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" ng-model="listaentidade.Nome" size="35" required placeholder=" * ">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">País:</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" ng-model="listaentidade.Pais">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Naturalidade:</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" ng-model="listaentidade.Naturalidade">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Data de Nascimento:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" datetime="dd-MM-yyyy" datetime-model="dd-MM-yyyy" ng-model="listaentidade.DataNasc" required placeholder=" * ">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">CC:</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" ng-model="listaentidade.CC" maxlength="50" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required placeholder=" * ">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">NIF: </label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" ng-model="listaentidade.NIF" maxlength="50" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required placeholder=" * ">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Habilitações: </label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" ng-model="listaentidade.Habilitacoes">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Profissão: </label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" ng-model="listaentidade.Profissao">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Telefone: </label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text"
+                                    ng-model="listaentidade.Telf"
+                                     maxlength="50"
+                                     onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Telemóvel: </label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text"
+                                    ng-model="listaentidade.Telm"
+                                     maxlength="50"
+                                     onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Email: </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text"
+                                    ng-model="listaentidade.Email"
+                                    size="30">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Morada: </label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" ng-model="listaentidade.Morada_Rua" placeholder="* Rua" required>
+                                </div>
+                                <div class="col-sm-1">
+                                    <input class="form-control" type="text" ng-model="listaentidade.Morada_Numero" placeholder="* Nº"  maxlength="6" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+                                </div>
+                                <div class="col-sm-1">
+                                    <input type="text" ng-model="listaentidade.Morada_Andar" placeholder="Andar"  maxlength="3">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Localidade: </label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" type="text" ng-model="listaentidade.Morada_CodPostal4" placeholder="*CP4" size="4" maxlength="4" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input class="form-control" type="text" ng-model="listaentidade.Morada_CodPostal3" placeholder="*CP3" size="3" maxlength="3" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" type="text" ng-model="listaentidade.Morada_Localidade" placeholder="*Localidade" required>
+                                    </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </uib-tab>
+
+
+                <!-- TAB Dados Desportivos....................................................................................... -->
+
+                <uib-tab index="1" heading="Dados Desportivos">
+
+                    <p><b>Escalões pelos quais responsável:</b></p>
+
+                    <div class="row" ng-repeat="escaloesResponsavel in escaloesResponsaveis track by $index">
+
+                            <div class="col-md-3" ng-init="escaloesResponsavel[0]='Futebol'">
+                                <select class="form-control" ng-model="escaloesResponsavel[0]" ng-options="modalidade.Nome as modalidade.Nome for modalidade in modalidades"         ng-change="addMod(escaloesResponsavel[0], $index)" disabled>
+                                        <option value="">Modalidade</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <select class="form-control" ng-model="escaloesResponsavel[1]" ng-options="epoca.Nome as epoca.Nome for epoca in epocas" ng-change="addEpoca(escaloesResponsavel[1], $index)">
+                                        <option value="">Época</option>
+                                      </select>
+                            </div>
+
+                            <div class="col-lg-4 col-md-3">
+                                <select class="form-control" ng-model="escaloesResponsavel[2]" ng-options="escalao.IDEscalao as escalao.Nome for escalao in escaloes | filter:{ EscMod : escaloesResponsavel[0]} | filter:{ EscEpoca : escaloesResponsavel[1] }" ng-change="addEscalao(escaloesResponsavel[2], $index)">
+                                        <option value="">Escalão</option>
+                                      </select>
+                            </div>
+
+                    </div>
+
+
+           <button class="btn btn-sm btn-default" ng-click="novoResp()">Adicionar Escalão</button>
+
+  </uib-tab>
+
+  <!-- TAB Dados Inscrição....................................................................................... -->
+  <uib-tab index="2" heading="Dados Inscrição" ng-if="2==1">
+   <div>
+      vazio
+   </div>
+  </uib-tab>
+
+  <!-- TAB Cromos....................................................................................... -->
+  <uib-tab index="3" heading="Cromos" ng-if="2==1">
+   <div>
+      vazio
+   </div>
+  </uib-tab>
+
+</uib-tabset>
+</form>
+
+<p><b>Ultima Atualização:</b> </b>{{listaentidade.UltimaAtualizacao}}</p>
+
+ </div>
+</div>

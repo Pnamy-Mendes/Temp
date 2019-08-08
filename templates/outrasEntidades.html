@@ -1,0 +1,55 @@
+<div ng-include="'templates/page-header.html'"></div>
+
+<div class="panel">
+
+    <div class="panel-title">
+        <div class="row">
+            <div class="col-md-6">
+                <b>{{titulo}}</b>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <table st-table="entidadesCollection" st-safe-src="entidades" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <input st-search placeholder="Pesquisa Global" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <div class="checkbox checkbox-warning CBinativos normal-case">
+                            <input ng-model="checkestado" id="checkbox105" type="checkbox">
+                            <label for="checkbox105">Mostrar Inativos</label>
+                        </div>
+                    </th>
+                    <th>
+                        <a ui-sref="NEWoutrasEntidades({tipoEnt:tipo})" class="btn btn-sm btn-primary float-r" ng-if="userRole==='ROLE_ADMIN'">
+                            <i class="fa fa-user-plus"></i> Adicionar
+                        </a>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="st-icon" st-sort="Nome">Nome</th>
+                    <th class="st-icon" st-sort="Telf">Telefone</th>
+                    <th class="st-icon" st-sort="Telm">Telemóvel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entidade in entidadesCollection | filter: {Estado: !checkestado}">
+                    <td><a ui-sref="outrasEntidadesPerfil({entidadeID: entidade.ID})">{{entidade.Nome}}</a></td>
+                    <td>{{entidade.Telf}}</td>
+                    <td>{{entidade.Telm}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,243 @@
+<div ng-include="'templates/page-header.html'"></div>
+
+<div class="panel">
+
+  <div class="panel-title">
+    <div class="row">
+      <div class="col-md-6">
+        <b>{{entidades.Nome}}</b>
+      </div>
+      <div class="col-md-4 col-md-offset-2">
+
+        <button ng-if="userRole==='ROLE_ADMIN'" class="btn btn-danger btn-sm" ng-click="deleteAtleta(entidades)">
+          <i class="fa fa-trash"></i> Apagar
+        </button>
+        <button ng-if="userRole==='ROLE_ADMIN'" class="btn btn-default btn-sm"
+          ui-sref="EDITatletaPerfil({entidadeID: entidades.ID})">
+          <i class="fa fa-edit"></i> Editar
+        </button>
+        <button ng-if="userRole==='ROLE_ADMIN'" ng-click="showModosPagamento()" class="btn btn-success">
+          <i class="fa fa-edit"></i> Inscrição
+        </button>
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Nav tabs -->
+  <uib-tabset>
+
+    <!-- TAB Dados Pessoais....................................................................................... -->
+    <uib-tab index="0" heading="Dados Pessoais">
+
+      <div class="row">
+
+        <div class="col-md-2" ng-if="entidades.FotoInscricao">
+          <div class="imgUpload">
+            <img ng-src="img/{{entidades.FotoInscricao}}" id="perfilFoto">
+          </div>
+        </div>
+
+        <div class="col-md-5">
+
+          <p><b>Ativo:</b> <span ng-class="{'InfoInativo': entidades.Estado == 'Inativo'}">{{entidades.Estado}} </span>
+          </p>
+          <p><b>Nome: </b>{{entidades.Nome}}</p>
+          <p><b>País: </b>{{entidades.Pais}}</p>
+          <p><b>Naturalidade: </b>{{entidades.Naturalidade}}</p>
+          <p><b>Data de Nascimento: </b>{{entidades.DataNasc}}</p>
+          <p><b>CC: </b>{{entidades.CC}}</p>
+          <p><b>NIF: </b>{{entidades.NIF}}</p>
+          <p><b>Habilitações: </b>{{entidades.Habilitacoes}}</p>
+          <p><b>Profissão: </b>{{entidades.Profissao}}</p>
+
+        </div>
+
+        <div class="col-md-5">
+          <p><b>Informação de Contacto</b></p>
+          <p><b>Telefone: </b>{{entidades.Telf}}</p>
+          <p><b>Telemóvel: </b>{{entidades.Telm}}</p>
+          <p><b>Email: </b>{{entidades.Email}}</p>
+          <p><b>Morada: </b>
+            {{entidades.Morada_Rua}}, {{entidades.Morada_Numero}} <span ng-if="entidades.Morada_Andar">(
+              {{entidades.Morada_Andar}}º Andar)</span></p>
+          <p><b>Localidade:</b> {{entidades.Morada_Localidade}} </p>
+          <p><b>Cód Postal:</b>{{entidades.Morada_CodPostal4}}-{{entidades.Morada_CodPostal3}}</p>
+        </div>
+
+      </div>
+    </uib-tab>
+
+    <!-- TAB Dados Desportivos/ Saúde............................................................................ -->
+    <uib-tab index="1" heading="Dados Desportivos/ Saúde">
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <p><b>Nº Licença: </b>{{entidades.NLicenca}}</p>
+          <p><b>Modalidades: </b>
+            <span ng-repeat="modalidade in entidades.Modalidade">
+              {{modalidade}}
+            </span>
+          </p>
+          <p><b>Escalão: </b>{{entidades.Escalao}}</p>
+          <p><b>Posição: </b>{{entidades.Posicao}}</p>
+        </div>
+
+        <div class="col-md-6">
+          <p><b>Grupo Sanguineo: </b>{{entidades.GSanguineo}}</p>
+          <p><b>Doenças: </b>{{entidades.Doencas}}</p>
+        </div>
+
+      </div>
+    </uib-tab>
+
+    <!-- TAB Tutores....................................................................................... -->
+    <uib-tab index="2" heading="Tutores">
+      <div class="row">
+
+        <div class="col-md-6">
+          <p><b>1º Tutor</b></p>
+          <p><b>Parentesco: </b>{{entidades.TipoTutorNome1}}</p>
+          <p><b>Nome: </b>{{entidades.NomeTutor1}}</p>
+          <p><b>CC: </b>{{entidades.CCTutor1}}</p>
+          <p><b>NIF: </b>{{entidades.NIFTutor1}}</p>
+          <p><b>Telefone: </b>{{entidades.TelfTutor1}}</p>
+          <p><b>Telemóvel: </b>{{entidades.TelmTutor1}}</p>
+          <p><b>Email: </b>{{entidades.EmailTutor1}}</p>
+          <p><b>Morada:</b> {{entidades.Morada_RuaTutor1}}, {{entidades.Morada_NumeroTutor1}} <span
+              ng-if="entidades.Morada_AndarTutor1">( {{entidades.Morada_AndarTutor1}}º Andar)</span></p>
+          <p><b>Localidade:</b> {{entidades.Morada_CodPostal4Tutor1}}-{{entidades.Morada_CodPostal3Tutor1}}
+            {{entidades.Morada_LocalidadeTutor1}}</p>
+        </div>
+
+        <div class="col-md-6">
+          <p><b>2º Tutor</p></b>
+          <p><span class="boldLabel perfilspan">Parentesco: </span>{{entidades.TipoTutorNome2}}</p>
+          <p><b>Nome: </b>{{entidades.NomeTutor2}}</p>
+          <p><b>CC: </b>{{entidades.CCTutor2}}</p>
+          <p><b>NIF: </b>{{entidades.NIFTutor2}}</p>
+          <p><b>Telefone: </b>{{entidades.TelfTutor2}}</p>
+          <p><b>Telemóvel: </b>{{entidades.TelmTutor2}}</p>
+          <p><b>Email: </b>{{entidades.EmailTutor2}}</p>
+          <p><b>Morada: </b>
+            {{entidades.Morada_RuaTutor2}}, {{entidades.Morada_NumeroTutor2}} <span
+              ng-if="entidades.Morada_AndarTutor2">( {{entidades.Morada_AndarTutor2}}º Andar)</span> </p>
+          <p><b>Localidade: </b>
+            {{entidades.Morada_CodPostal4Tutor2}}-{{entidades.Morada_CodPostal3Tutor2}}
+            {{entidades.Morada_LocalidadeTutor2}}</p>
+        </div>
+
+      </div>
+
+    </uib-tab>
+
+    <!-- TAB Equipamento....................................................................................... -->
+    <uib-tab index="3" heading="Equipamento">
+      <p><b>Nome da Camisola: </b> {{entidades.Equipamento_Nome}}</p>
+      <p><b>Número da Camisola: </b> {{entidades.Equipamento_Numero}}</p>
+      <p><b>Tamanho: </b> {{entidades.Equipamento_Tamanho}}</p>
+      <p><b>Época: </b> {{epocas[0].Nome}}</p>
+      <p ng-if="entidades.GR"><b>Guarda-Redes: </b> {{entidades.GR}}</p>
+    </uib-tab>
+
+    <!-- TAB Dados Inscrição....................................................................................... -->
+    <uib-tab index="4" heading="Dados Inscrição" ng-if="2==1">
+      <div>
+        vazio
+      </div>
+    </uib-tab>
+
+    <!-- TAB Pagamentos....................................................................................... -->
+    <uib-tab index="5" heading="Documentos">
+      <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>descricao</th>
+              <th>tipo</th>
+              <th>ficheiro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="doc in entidades.Documentos">
+              <td>{{doc.descricao}}</td>
+              <td>{{doc.tipo}}</td>
+              <td><a href="{{doc.ficheiro_url}}" target="_blank">{{doc.ficheiro}}</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </uib-tab>
+    <!-- TAB Cromos....................................................................................... -->
+    <uib-tab index="6" heading="Pagamentos" ng-show="entidades.Epocas.length" select="activeTabIndex = 0">
+      <div class="row">
+
+        <div class="panel panel-default">
+          <div class="panel-title">Épocas</div>
+          <div class="panel-body">
+            <div role="tabpanel">
+
+              <uib-tabset active="activeTabIndex">
+
+                <uib-tab index="$index" ng-repeat="epoca in entidades.Epocas" heading="{{epoca.Nome}}">
+
+                  <div class="row" ng-repeat="modo in epoca.ModosPagamento">
+                    <div class=" row well">
+                      <div class="col-md-4"><i class="fa fa-bookmark-o" aria-hidden="true"></i> <strong>Modo de
+                          pagamento:</strong> {{modo.Descricao}}</div>
+                      <div class="col-md-4"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        <strong>Estado:</strong> <span ng-if="modo.Activo">Activo</span><span
+                          ng-if="!modo.Activo">Inactivo</span></div>
+                      <div class="col-md-4"></div>
+                    </div>
+
+                    <table class="table">
+                      <tr>
+                        <th>desc</th>
+                        <th>valor</th>
+                        <th>data limite</th>
+                        <th>valor p/ lim.</th>
+                        <th>beneficio</th>
+                        <th></th>
+                        <th>pago</th>
+                        <th></th>
+                      </tr>
+                      <tr ng-repeat="pagamento in modo.Pagamentos">
+                        <td>{{pagamento.Descricao}}</td>
+                        <td>{{pagamento.Valor}} &euro;</td>
+                        <td>{{pagamento.DataLimite}}</td>
+                        <td><span ng-if="pagamento.ValorPosLimite">{{pagamento.ValorPosLimite}}</span><span
+                            ng-if="!pagamento.ValorPosLimite">--</span></td>
+                        <td><span ng-if="pagamento.Benificio"><i class="fa fa-check color7"></i></span><span
+                            ng-if="!pagamento.Benificio"><i class="fa fa-times color10"></i></span></td>
+                        <td>{{pagamento.DescricaoBenificio}}</td>
+                        <td><span ng-if="pagamento.Pago"><i class="fa fa-check color7"></i></span><span
+                            ng-if="!pagamento.Pago"><i class="fa fa-times color10"></i></span></td>
+                        <td>
+                          <button ng-if="userRole==='ROLE_ADMIN'" class="btn btn-warning">
+                            <i class="fa fa-edit"></i> Marcar como pago
+                          </button>
+                        </td>
+                      </tr>
+                    </table>
+                    <hr />
+                  </div>
+                </uib-tab>
+              </uib-tabset>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </uib-tab>
+
+  </uib-tabset>
+
+
+  <p><span class="contactspan"><b>Ultima Atualização:</b> </span>{{entidades.UltimaAtualizacao}}</p>
+
+</div>

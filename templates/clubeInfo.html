@@ -1,0 +1,63 @@
+<div ng-include="'templates/page-header.html'"></div>
+
+<div class="panel padding-b-40">
+
+    <div ng-repeat="clubeinfo in clube">
+
+        <button ng-if="userRole==='ROLE_ADMIN'" class="btn btn-sm enviar margin-b-15" ui-sref="EDITclube()">
+            <i class="fa fa-edit"></i> Editar
+        </button>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-7">
+                        <table class="customTable2">
+                            <tr>
+                                <td colspan="2"><h2 class="margin-b-20">{{clubeinfo.Nome}}</h2></td>
+                            </tr>
+                            <tr>
+                                <td><label>Abreviatura</label></td>
+                                <td>{{clubeinfo.Abrv}}</td>
+                            </tr>
+                            <tr>
+                                <td><label>Número FPF</label></td>
+                                <td>{{clubeinfo.N_FPF}}</td>
+                            </tr>
+                            <tr>
+                                <td><label>Associação</label></td>
+                                <td>{{clubeinfo.Associacao}}</td>
+                            </tr>
+                            <tr>
+                                <td><label>Presidente</label></td>
+                                <td>{{clubeinfo.Presidente}}</td>
+                            </tr>
+                            <tr>
+                                <td><label>Estádio</label></td>
+                                <td>{{clubeinfo.Estadio}}</td>
+                            </tr>
+                            <tr>
+                                <td><label>Cidade</label></td>
+                                <td>{{clubeinfo.Cidade}}</td>
+                            </tr>
+                            <tr>
+                                <td><label>País</label></td>
+                                <td>{{clubeinfo.Pais}}</td>
+                            </tr>
+                        </table>
+                    <!-- <h2>{{clubeinfo.Nome}}</h2>
+                    <p><label>Abreviatura: </label>{{clubeinfo.Abrv}}</p>
+                    <p><label>Número FPF: </label> {{clubeinfo.N_FPF}}</p>
+                    <p><label>Associação: </label>{{clubeinfo.Associacao}}</p>
+                    <p><label>Fundação: </label> {{clubeinfo.Fundacao}}</p>
+                    <p><label>Presidente: </label>{{clubeinfo.Presidente}}</p>
+                    <p><label>Estádio: </label>{{clubeinfo.Estadio}}</p>
+                    <p><label>Cidade: </label>{{clubeinfo.Cidade}}</p>
+                    <p><label>País: </label>{{clubeinfo.Pais}}</p> -->
+                </div>
+                <div class="col-md-3">
+                    <img ng-src="img/{{clubeinfo.Foto}}" alt="C.D.E." class="img-responsive" style="max-width: 200px; margin-top: 20px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

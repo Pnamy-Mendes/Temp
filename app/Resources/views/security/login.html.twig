@@ -1,0 +1,44 @@
+<!-- This page only links -->
+<head>
+    <link href="img/logoNew2D.png" rel="shortcut icon">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}"> 
+
+</head>
+<!-- -->
+
+        <div id="wrapper">
+            <div id="login" class="animate form">
+                <section class="login_content row">
+                    <form class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1" action="{{ path('login') }}" method="post">
+                        
+                        <img src="img/logoNew2.png" class="logoLogin col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+
+                        <!--<img src="img/t3.png" height="30"><br><br>-->
+                        <!--<h1>Login</h1>-->
+                        
+                        <input class="inputLogin col-lg-12 col-md-12 col-sm-12" spellcheck="false" type="email" placeholder="Email" required name="_username" value="{{ last_username }} " >
+                    
+                        <input class="inputLogin col-lg-12 col-md-12 col-sm-12" type="password"  required name="_password" placeholder="Password"/>
+                    
+                        <button class="col-lg-12 col-md-12 col-sm-12" id="buttonlogin" type="submit" >
+                            {% if error %} Dados inválidos. Tentar Novamente.{% else %} ENTRAR {% endif %}
+                        </button>
+                        
+
+                        <div class="clearfix"></div>
+                        <div class="separator">
+                            <br>
+                            <div class="footerLogin">
+                                <p>DashSoccer ©2016</p>
+                                <p>Todos os direitos reservados. </p>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- form -->
+                </section>
+                <!-- content -->
+            </div>
+        </div>
+    </div>

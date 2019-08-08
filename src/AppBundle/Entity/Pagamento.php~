@@ -1,0 +1,85 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+* @ORM\Entity
+* @ORM\Table(name="Pagamento")
+**/
+class Pagamento
+{
+  /**
+  * @ORM\Id
+  * @ORM\Column(name="ID_Pagamento", type="integer")
+  * @ORM\GeneratedValue
+  **/
+  protected $ID_Pagamento;
+
+  /**
+  * @ORM\ManyToOne(targetEntity="ModoPagamento", inversedBy="Pagamentos")
+  * @ORM\JoinColumn(name="REF_ModoPagamento", referencedColumnName="ID_Modo_Pagamento")
+  **/
+  protected $ModoPagamento;
+
+  /**
+  * @ORM\Column(name="Descricao", type="string")
+  * @Assert\NotNull(
+  *     message = "Campo obrigatório!"
+  * )
+  * @Assert\Regex(
+  *     pattern     = "/^[a-zàáãâéêíóõôúç 0-9.]+$/i",
+  *     htmlPattern = "^[a-zA-Zàáãâéêíóõôúç 0-9.]+$",
+  *     message="O campo Descricao Pagamento não pode conter caracteres especiais."
+  * )
+  * @Assert\Length(
+  *      max = 50,
+  *      maxMessage = "O campo Descricao Pagamento não pode ter mais de {{ limit }} caracteres."
+  * )
+  **/
+  protected $Descricao;
+
+  /**
+  * @ORM\Column(name="Valor", type="integer", nullable=true)
+  * @Assert\NotNull(
+  *     message = "Campo obrigatório!"
+  * )
+  */
+  protected $Valor;
+
+  /**
+  * @ORM\Column(name="DataLimite", type="date")
+  * @Assert\NotNull(
+  *     message = "Campo obrigatório!"
+  * )
+  * @Assert\Date(
+  *   message = "Data inválida!"
+  * )
+  **/
+  protected $DataLimite;
+
+  /**
+  * @ORM\Column(name="Benificio", type="integer")
+  **/
+  protected $Benificio;
+
+  /**
+  * @ORM\Column(name="DescricaoBenificio", type="string")
+  * @Assert\NotNull(
+  *     message = "Campo obrigatório!"
+  * )
+  * @Assert\Regex(
+  *     pattern     = "/^[a-zàáãâéêíóõôúç 0-9.]+$/i",
+  *     htmlPattern = "^[a-zA-Zàáãâéêíóõôúç 0-9.]+$",
+  *     message="O campo Descricao Benificio não pode conter caracteres especiais."
+  * )
+  * @Assert\Length(
+  *      max = 50,
+  *      maxMessage = "O campo Descricao Benificio não pode ter mais de {{ limit }} caracteres."
+  * )
+  **/
+  protected $DescricaoBenificio;
+}

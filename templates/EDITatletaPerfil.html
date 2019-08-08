@@ -1,0 +1,586 @@
+<div ng-include="'templates/page-header.html'"></div>
+
+<div class="panel">
+
+<div class="row">
+
+    <div class="col-md-4">
+
+        <button ng-if="entidades.ID" class="btn btn-danger btn-sm" ui-sref="atletaPerfil({entidadeID: entidades.ID})" style="margin-left:10px;">
+       <i class="fa fa-arrow-left"></i> Voltar
+     </button>
+        <button ng-if="!entidades.ID" class="btn btn-danger btn-sm" ui-sref="atletas" style="margin-left:10px;">
+       <i class="fa fa-arrow-left"></i> Voltar
+     </button>
+        <button ng-if="entidades.ID" ng-disabled="FormEnt.$invalid" class="btn btn-sm" ng-click="editarAtleta(entidades)">
+       <i class="fa fa-save"></i> Guardar
+     </button>
+        <button ng-if="!entidades.ID" ng-disabled="FormEnt.$invalid" class="btn btn-sm" ng-click="novoAtleta(entidades)">
+       <i class="fa fa-save"></i> Guardar
+     </button>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="radio" ng-init="entidades.EstadoID = entidades.EstadoID == null ? 1 : entidades.EstadoID">
+
+            <div class="radio radio-inline">
+                <input ng-model="entidades.EstadoID" type="radio" id="inlineRadio2" ng-value="0" name="radioInline">
+                <label for="inlineRadio2"> Inativo   </label>
+            </div>
+
+            <div class="radio radio-warning radio-inline">
+                <input ng-model="entidades.EstadoID" type="radio" id="inlineRadio1" ng-value="1" name="radioInline">
+                <label for="inlineRadio1"> Ativo  </label>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+      <button type="button" class="btn btn-sm btn-danger" ng-if="epocas.length" ng-click="showModosPagamento()">Pagamentos*</button>
+    </div>
+</div>
+
+<form name="FormEnt" class="form-horizontal">
+
+  <ul>
+    <li ng-repeat="(key, errors) in FormEnt.$error track by $index"> <strong>{{ key }}</strong> errors
+      <ul>
+        <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+      </ul>
+    </li>
+  </ul>
+
+<!-- Nav tabs -->
+<uib-tabset>
+
+  <!-- TAB Dados Pessoais....................................................................................... -->
+  <uib-tab index="0" heading="Dados Pessoais">
+   <div class="row">
+
+     <div class="col-md-2">
+         <file-upload id="{{entidades.ID}}" model="entidades.FotoInscricao"  ng-if="entidades.ID"></file-upload>
+   </div>
+
+    <div class="col-md-5">
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Nome: </label>
+          <div class="col-sm-9">
+          <input class="form-control" type="text" name="Nome" ng-model="entidades.Nome" required placeholder=" * ">
+        </div>
+        </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">País: </label>
+            <div class="col-sm-6">
+          <input class="form-control" type="text" name="Pais" ng-model="entidades.Pais">
+        </div>
+        </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Naturalidade: </label>
+            <div class="col-sm-6">
+          <input class="form-control" type="text" name="Naturalidade" ng-model="entidades.Naturalidade">
+        </div>
+        </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Data de Nascimento: </label>
+            <div class="col-sm-4">
+          <input class="form-control" type="text" name="DataNascimento" datetime="dd-MM-yyyy" datetime-model="dd-MM-yyyy" ng-model="entidades.DataNasc" required placeholder=" * ">
+        </div>
+        </div>
+
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">CC: </label>
+            <div class="col-sm-6">
+          <input class="form-control" type="text" name="CC" ng-model="entidades.CC" maxlength="50" required placeholder=" * ">
+        </div>
+        </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">NIF: </label>
+            <div class="col-sm-6">
+          <input class="form-control" type="text" name="NIF" ng-model="entidades.NIF" maxlength="50" required placeholder=" * ">
+        </div>
+      </div>
+
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Habilitações: </label>
+            <div class="col-sm-6">
+          <input class="form-control" type="text" name="Habilitacoes" ng-model="entidades.Habilitacoes">
+        </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Profissão: </label>
+          <div class="col-sm-6">
+          <input class="form-control" type="text" name="Profissao" ng-model="entidades.Profissao">
+        </div>
+        </div>
+
+      </div>
+
+
+    <div class="col-md-5">
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Telefone: </label>
+                <div class="col-sm-6">
+              <input class="form-control" type="text" name="Telf" ng-model="entidades.Telf" maxlength="50">
+            </div>
+          </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Telemóvel: </label>
+              <div class="col-sm-6">
+            <input class="form-control" type="text" name="Telm"  ng-model="entidades.Telm"  maxlength="50">
+          </div>
+        </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Email: </label>
+                <div class="col-sm-6">
+              <input class="form-control" type="text" name="Email" ng-model="entidades.Email" size="30">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Morada: </label>
+            <div class="col-sm-4">
+            <input class="form-control" type="text" name="Morada_Rua" ng-model="entidades.Morada_Rua" placeholder="* Rua" required>
+          </div>
+          <div class="col-sm-2">
+            <input class="form-control" type="text" name="Morada_Numero" ng-model="entidades.Morada_Numero" placeholder="* Nº" required size="4"  maxlength="6">
+          </div>
+          <div class="col-sm-2">
+            <input class="form-control" type="text" name="Morada_Andar" ng-model="entidades.Morada_Andar" placeholder="Andar" size="6" maxlength="6">
+          </div>
+
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Localidade: </label>
+            <div class="col-sm-2">
+             <input class="form-control" type="text" name="Morada_CodPostal4" ng-model="entidades.Morada_CodPostal4" placeholder="*CP4" size="4"  maxlength="4" required>
+           </div>
+           <div class="col-sm-2">
+             <input class="form-control" type="text" name="Morada_CodPostal3" ng-model="entidades.Morada_CodPostal3" placeholder="*CP3" size="3" maxlength="3" required>
+           </div>
+           <div class="col-sm-4">
+             <input class="form-control" type="text" name="Morada_Localidade" ng-model="entidades.Morada_Localidade" placeholder="*Localidade" required>
+           </div>
+         </div>
+
+    </div>
+
+   </div>
+  </uib-tab>
+
+  <!-- TAB Dados Desportivos/ Saúde............................................................................ -->
+  <uib-tab index="1" heading="Dados Desportivos/ Saúde">
+   <div class="row">
+    <div class="col-md-6">
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Nº Licença: </label>
+            <div class="col-sm-9">
+                <input class="form-control" type="text" name="NLicenca" ng-model="entidades.NLicenca" maxlength="13" placeholder=" * " required>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Posição: </label>
+            <div class="col-sm-9">
+                <select class="form-control" name="IDPosicao" ng-model="entidades.IDPosicao" ng-options="posicao.IDPosicao as posicao.Nome for posicao in posicoes">
+        </select>
+            </div>
+        </div>
+
+        <span ng-init="entidades.ModalidadeID[1]=null"></label>
+
+        <div class="form-group" ng-init="entidades.ModalidadeID[0]=1">
+            <label class="col-sm-3 control-label">Modalidade Principal: </label>
+
+            <div class="col-sm-9" ng-init="modPrincipalNome='Futebol'">
+                <input class="form-control" type="text" ng-model="modPrincipalNome" disabled>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Modalidade Secundária: </label>
+            <div class="col-sm-9">
+                <select class="form-control" ng-model="entidades.ModalidadeID[1]" ng-options="modalidade.IDModalidade as modalidade.Nome for modalidade in modalidades">
+            <option value="">Nenhuma</option>
+          </select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Grupo Sanguineo: </label>
+            <div class="col-sm-9">
+                <select class="form-control" name="GSanguineo" ng-model="entidades.GSanguineo">
+                  <option value="O-">O-</option>
+                  <option value="O+">O+</option>
+                  <option value="A-">A-</option>
+                  <option value="A+">A+</option>
+                  <option value="B-">B-</option>
+                  <option value="B+">B+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="AB+">AB+</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Doenças: </label>
+            <div class="col-sm-9">
+                <input class="form-control" type="text" name="Doencas" ng-model="entidades.Doencas" size="50">
+            </div>
+        </div>
+
+    </div>
+    </div>
+  </uib-tab>
+
+  <!-- TAB Tutores....................................................................................... -->
+  <uib-tab index="2" heading="Tutores">
+    <div class="row">
+    <div class="col-md-6">
+
+    <p><b>1º Tutor</b></p>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Parentesco: </label>
+    <div class="col-sm-9">
+    <select ng-model="entidades.TipoTutor1" name="TipoTutor1" ng-options="relacao.IDtiporel as relacao.Nome for relacao in relacoes">
+    <option value=""> * </option>
+    </select>
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Nome: </label>
+    <div class="col-sm-9">
+    <input type="text" ng-model="entidades.NomeTutor1" name="NomeTutor1" size="35" placeholder=" * ">
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">CC: </label>
+    <div class="col-sm-6">
+    <input type="text" ng-model="entidades.CCTutor1" name="CCTutor1" maxlength="50">
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">NIF: </label>
+    <div class="col-sm-6">
+    <input type="text" ng-model="entidades.NIFTutor1" name="NIFTutor1" maxlength="50">
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Telefone: </label>
+    <div class="col-sm-6">
+    <input type="text" ng-model="entidades.TelfTutor1" name="TelfTutor1" maxlength="50">
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Telemóvel: </label>
+    <div class="col-sm-6">
+    <input type="text" ng-model="entidades.TelmTutor1" name="TelmTutor1" maxlength="50">
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Email:</label>
+    <div class="col-sm-6">
+    <input type="email" ng-model="entidades.EmailTutor1" name="EmailTutor1" size="30">
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Morada:</label>
+    <div class="col-sm-9">
+    <input type="text" ng-model="entidades.Morada_RuaTutor1" name="Morada_RuaTutor1" placeholder="Rua">
+    <input type="text" ng-model="entidades.Morada_NumeroTutor1" name="Morada_NumeroTutor1" placeholder="Nº" maxlength="6" size="4">
+    <input type="text" ng-model="entidades.Morada_AndarTutor1" name="Morada_AndarTutor1" placeholder="Andar" maxlength="6" size="6">
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Localidade: </label>
+    <div class="col-sm-9">
+    <input type="text" ng-model="entidades.Morada_CodPostal4Tutor1" name="Morada_CodPostal4Tutor1" placeholder="CP4" size="4" maxlength="4">
+    <input type="text" ng-model="entidades.Morada_CodPostal3Tutor1" name="Morada_CodPostal3Tutor1" placeholder="CP3" size="3"  maxlength="3">
+    <input type="text" ng-model="entidades.Morada_LocalidadeTutor1" name="Morada_LocalidadeTutor1" placeholder="Localidade">
+    </div>
+    </div>
+
+
+    <button class="btn btn-sm" ng-click="copiarMoradaT1()">Utilizar morada do atleta</button>
+
+    </div>
+
+
+    <div class="col-md-6">
+
+    <div class="form-group">
+    <div class="col-sm-4">
+    <div class="checkbox checkbox-inline">
+        <input type="checkbox" id="2tutor" ng-click="toggleTutor2()" ng-checked="hasT2">
+        <label for="2tutor"> 2º Tutor</label>
+    </div>
+    </div>
+    <div class="col-sm-4">
+    <div ng-show="hasT2" class="checkbox checkbox-inline">
+        <input id="hasT2" type="checkbox" ng-model="T2isStaff">
+        <label for="hasT2">Escolher Staff como tutor</label>
+    </div>
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Parentesco: </label>
+    <select ng-disabled="!hasT2" ng-model="entidades.TipoTutor2" name="TipoTutor2" ng-options="relacao.IDtiporel as relacao.Nome for relacao in relacoes" ng-required="T2isStaff"></select>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Nome: </label>
+    <input type="text" ng-model="entidades.NomeTutor2" name="NomeTutor2" size="35">
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">CC: </label>
+    <input type="text" ng-model="entidades.CCTutor2" name="CCTutor2" maxlength="50">
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">NIF: </label>
+    <input type="text" ng-model="entidades.NIFTutor2" name="NIFTutor2" maxlength="50">
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Telefone: </label>
+    <input type="text" ng-model="entidades.TelfTutor2" name="TelfTutor2" maxlength="50">
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Telemóvel: </label>
+    <input type="text" ng-model="entidades.TelmTutor2" name="TelmTutor2" maxlength="50">
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Email: </label>
+    <input type="email" ng-model="entidades.EmailTutor2" name="EmailTutor2" size="30">
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Morada: </label>
+    <input type="text" ng-model="entidades.Morada_RuaTutor2" name="Morada_RuaTutor2" placeholder="Rua" ng-disabled="!hasT2 || T2isStaff">
+    <input type="text" ng-model="entidades.Morada_NumeroTutor2" name="Morada_NumeroTutor2" placeholder="Nº" size="4" maxlength="6" ng-disabled="!hasT2 || T2isStaff">
+    <input type="text" ng-model="entidades.Morada_AndarTutor2" name="Morada_AndarTutor2" placeholder="Andar" size="4" maxlength="6" ng-disabled="!hasT2 || T2isStaff">
+
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Localidade: </label>
+    <input type="text" ng-model="entidades.Morada_CodPostal4Tutor2" name="Morada_CodPostal4Tutor2" placeholder="CP4" size="4" maxlength="4" ng-disabled="!hasT2 || T2isStaff"> -
+    <input type="text" ng-model="entidades.Morada_CodPostal3Tutor2" name="Morada_CodPostal3Tutor2" placeholder="CP3" size="3" maxlength="3" ng-disabled="!hasT2 || T2isStaff">
+    <input type="text" ng-model="entidades.Morada_LocalidadeTutor2" name="Morada_LocalidadeTutor2" placeholder="Localidade" ng-disabled="!hasT2 || T2isStaff">
+    </div>
+
+
+    <button class="btn btn-sm" ng-click="copiarMoradaT2()">Utilizar morada do atleta</button>
+
+    </div>
+    </div>
+  </uib-tab>
+
+  <!-- TAB Equipamento....................................................................................... -->
+  <uib-tab index="3" heading="Equipamento">
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Nome da Camisola: </label>
+    <input type="text" ng-model="entidades.Equipamento_Nome" name="Equipamento_Nome"  maxlength="25">
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Número da Camisola: </label>
+    <input type="text" ng-model="entidades.Equipamento_Numero" name="Equipamento_Numero" maxlength="2">
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Observações: </label>
+      <textarea class="textarea" ng-model="entidades.Equipamento_observacoes" name="Equipamento_observacoes"></textarea>
+    </div>
+
+    <div class="form-group">
+    <label class="col-sm-3 control-label">Tamanho: </label>
+    <select ng-model="entidades.Equipamento_TamanhoID" name="Equipamento_TamanhoID" ng-options="tamanho.IDTamanho as tamanho.Nome for tamanho in tamanhos"></select>
+    </div>
+
+
+    <button type="button" class="btn btn-default" id="delEquipamento" ng-click="toogleEquipamento()" ng-if="entidades.Equipamento_ID">Remover equipamento actual</button>
+  </uib-tab>
+
+  <!-- TAB Documentos....................................................................................... -->
+  <uib-tab index="4" heading="Documentos">
+
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" ng-click="saveDocumentos()" class="btn btn-sm btn-default">Adicionar novo</button>
+        </div>
+    </div>
+
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>descricao</th><th>tipo</th><th>ficheiro</th><th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="doc in entidades.Documentos">
+            <td>{{doc.descricao}}</td>
+            <td>{{doc.tipo}}</td>
+            <td><a href="{{doc.ficheiro_url}}" target="_blank">{{doc.ficheiro}}</a></td>
+            <td><button type="button" class="btn btn-sm btn-default" ng-click="deleteDocumento(doc, $index)">Remover</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </uib-tab>
+
+  <!-- TAB Pagamentos....................................................................................... -->
+    <uib-tab index="5" heading="Pagamentos" ng-show="entidades.Epocas.length" select="activeTabIndex = 0">
+      <div class="row" >
+
+        <div class="panel panel-default">
+          <div class="panel-title">Épocas</div>
+          <div class="panel-body">
+            <div role="tabpanel">
+
+              <uib-tabset active="activeTabIndex">
+
+                 <uib-tab index="$index" ng-repeat="epoca in entidades.Epocas" heading="{{epoca.Nome}}">
+
+                   <div class="row" ng-repeat="modo in epoca.ModosPagamento">
+                     <div class=" row well">
+                       <div class="col-md-4"><i class="fa fa-bookmark-o" aria-hidden="true"></i> <strong>Modo de pagamento:</strong> {{modo.Descricao}}</div>
+                       <div class="col-md-4"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Estado:</strong> <span ng-if="modo.Activo">Activo</span><span ng-if="!modo.Activo">Inactivo</span></div>
+                       <div class="col-md-4"><button type="button" class="btn btn-sm btn-danger" ng-if="modo.Activo" ng-click="desativarModoPagamento(modo)">Desactivar</button></div>
+                     </div>
+
+                    <table class="table">
+                      <tr><th>desc</th><th>valor</th><th>data limite</th><th>valor p/ lim.</th><th>beneficio</th><th></th><th>pago</th><th></th></tr>
+                      <tr ng-repeat="pagamento in modo.Pagamentos">
+                        <td>{{pagamento.Descricao}}</td>
+                        <td>{{pagamento.Valor}} &euro;</td>
+                        <td>{{pagamento.DataLimite}}</td>
+                        <td><span ng-if="pagamento.ValorPosLimite">{{pagamento.ValorPosLimite}}</span><span ng-if="!pagamento.ValorPosLimite">--</span></td>
+                        <td><span ng-if="pagamento.Benificio"><i class="fa fa-check color7"></i></span><span ng-if="!pagamento.Benificio"><i class="fa fa-times color10"></i></span></td>
+                        <td>{{pagamento.DescricaoBenificio}}</td>
+                        <td><span ng-if="pagamento.Pago"><i class="fa fa-check color7"></i></span><span ng-if="!pagamento.Pago"><i class="fa fa-times color10"></i></span></td>
+                        <td>
+                          <button type="button" class="btn btn-sm btn-warning" ng-show="!pagamento.Pago && $parent.modo.Activo" ng-click="efetuarPagamento($parent.modo.ID_Modo_Pagamento_Entidade,pagamento)">Marcar como pago</button>
+                          <button type="button" class="btn btn-sm btn-danger" ng-show="pagamento.Pago && $parent.modo.Activo" ng-click="anularPagamento($parent.modo.ID_Modo_Pagamento_Entidade,pagamento)">Anular pagamento</button>
+                        </td>
+                      </tr>
+                    </table>
+                    <hr />
+                   </div>
+                 </uib-tab>
+              </uib-tabset>
+
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </uib-tab>
+
+</uib-tabset>
+
+</form>
+
+    <p ng-if="entidades.ID"><b>Ultima Atualização:</b> {{entidades.UltimaAtualizacao}}</p>
+
+
+ </div>
+</div>
+
+<!----------------- file upload modal ------------------->
+<script type="text/ng-template" id="fileUploadModal">
+
+    <div class="modal-header">
+        <h3 class="modal-title">Upload de documento</h3>
+    </div>
+
+    <div class="modal-body">
+
+        <form class="form-horizontal" name="fileUpload">
+            <div class="form-group">
+                <label class="col-sm-2 form-label">Descrição:</label>
+                <div class="col-md-8">
+                    <input class="form-control" type="text" name="nomeFich" ng-model="documento.descricao" placeholder="Descricao do ficheiro" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 form-label">Tipo:</label>
+                <div class="col-md-8">
+                    <span class="metro-dropdown">
+                    <select ng-model="documento.REF_tipodocumento"
+                      ng-options="tipoDoc.ID_tipodocumento as tipoDoc.descricao for tipoDoc in tiposDoc"
+                      class="form-control" required />
+                      <option value="">Escolher tipo...</option>
+                    </select>
+                </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 form-label">Ficheiro:</label>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="documento.ficheiro.name" readonly required />
+                </div>
+                <div class="btn" ngf-select="uploadFiles($file, $invalidFiles)" ng-model="documento.ficheiro" ngf-accept="'.pdf,.doc,.docx'" ngf-pattern="'.pdf,.doc,.docx'" ngf-validate="{size: {min: 10, max: '20MB'}}">
+                    <a class="fa fa-search"></a>
+                </div>
+            </div>
+
+            <div class="form-group" ng-if="progress">
+                <label class="col-sm-2 form-label">Progresso:</label>
+                <div class="col-md-8">
+
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+                         {{progress}}%
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+    </form>
+</div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" type="button" ng-disabled="fileUpload.$invalid" ng-click="upload()">Guardar</button>
+        <button class="btn btn-sm" type="button" ng-click="cancel()">Cancelar</button>
+    </div>
+</script>

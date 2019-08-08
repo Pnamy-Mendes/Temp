@@ -1,0 +1,18 @@
+<div>
+
+    <img ng-if="fileread" class="center-block img-responsive" data-ng-src="{{fileread}}" />
+
+    <img ng-if="!fileread" class="center-block img-responsive" ng-src="img/{{model}}" />
+
+<!--
+    <input class="form-control input-sm" readonly="" type="text" value="{{file}}">-->
+
+    <label class="btn btn-sm btn-block btn-primary">
+                Escolher <input id="upload" type="file" name="file" style="display: none;">
+            </label>
+
+    <button class="btn btn-default btn-block btn-sm" ng-click="upload();" type="button">
+        <span ng-if="!status">Enviar</span>
+        <span ng-if="status=='ok'">Enviado</span>
+    </button>
+</div>

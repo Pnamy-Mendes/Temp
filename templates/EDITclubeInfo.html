@@ -1,0 +1,71 @@
+<div ng-include="'templates/page-header.html'"></div>
+
+<div class="panel padding-b-40">
+
+<div ng-repeat="clubeinfo in clube">
+
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-danger fa fa-times" ui-sref="clube" style="margin-left:10px;"></button>
+            <button ng-disabled="DadosClubeForm.$invalid" class="btn enviar fa fa-save" ng-click="editarDadosClube(clubeinfo)"></button>
+        </div>
+    </div>
+
+    <div class="row margin-t-30">
+        <div class="col-md-12">
+            <form name="DadosClubeForm">
+
+                <div class="col-md-7">
+                    <div id="clubInfoText">
+                        <table class="customTable">
+                            <tr>
+                                <td><span>Clube </span></td>
+                                <td><input type="text" ng-model="clubeinfo.Nome" required placeholder=" * " size="40"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="boldLabel">Abreviatura </span></td>
+                                <td><input type="text" ng-model="clubeinfo.Abrv" required placeholder=" * " size="15"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="boldLabel">Número FPF </span></td>
+                                <td><input type="text" ng-model="clubeinfo.N_FPF" onkeypress='return event.charCode >= 48 && event.charCode <= 57' size="15"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="boldLabel">Associação </span></td>
+                                <td><input type="text" ng-model="clubeinfo.Associacao" size="40"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="boldLabel">Fundação </span></td>
+                                <td><input type="text" datetime="dd-MM-yyyy" datetime-model="dd-MM-yyyy" ng-model="clubeinfo.Fundacao" size="15"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="boldLabel">Presidente </span></td>
+                                <td><input type="text" ng-model="clubeinfo.Presidente" size="40"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="boldLabel">Estádio </span></td>
+                                <td><input type="text" ng-model="clubeinfo.Estadio" required placeholder=" * " size="40"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="boldLabel">Cidade </span></td>
+                                <td><input type="text" ng-model="clubeinfo.Cidade" required placeholder=" * " size="40"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="boldLabel">País </span></td>
+                                <td><input type="text" ng-model="clubeinfo.Pais" size="40"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 col-md-offset-1">
+                    <img ng-src="img/{{clubeinfo.Foto}}" alt="C.D.E." class="boximg img-responsive" style="max-width: 200px; margin-top: 20px;">
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    </div>
+</div>

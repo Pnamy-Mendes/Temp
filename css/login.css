@@ -1,0 +1,257 @@
+/********* login ****************/
+@font-face {
+    font-family: 'Quicksand';
+    src: url(../fonts/Quicksand-Regular.ttf);
+}
+
+body{
+  color:#fff;
+  /* background-color: #222 !important; */
+  font-family: "Quicksand";
+  -webkit-animation: fadeIn 2s linear 1; /* Safari & Chrome */
+  -moz-animation: fadeIn 2s linear 1; /* Firefox */
+  -o-animation: fadeIn 2s linear 1;  /* Opera */
+  animation: fadeIn 2s linear 1;
+  background-image:
+    linear-gradient(to bottom, rgba(12, 11, 19, 0.8), rgba(31, 30, 49, 0.8)),
+    url('../img/bg.jpg');
+ 
+width: auto;
+height: 100%;
+background-size: cover;
+overflow: hidden;
+}
+
+.logoLogin{
+    height: auto;
+    margin-bottom: 60px;
+}
+
+input[type="submit"]{
+    box-shadow: none !important;
+}
+
+h1{
+    color: #fff !important;
+}
+
+a.hiddenanchor{
+    display: none;
+}
+/** The wrapper that will contain the two forms **/
+#wrapper{
+    right: 0px;
+    margin: 0px auto;
+    /* max-width: 350px; */
+    position: relative;
+    font-family: "Quicksand" !important;
+}
+
+#register,
+#login{
+    position: absolute;
+    top: 0px; 
+    width:100%;
+}
+#register{
+    z-index: 21;
+    opacity: 0; 
+    width:100%;
+}
+#login{
+    z-index: 22;
+}
+#toregister:target ~ #wrapper #register,
+#tologin:target ~ #wrapper #login{
+    z-index: 22;
+    -webkit-animation-name: fadeInLeft;
+    -moz-animation-name: fadeInLeft;
+    -ms-animation-name: fadeInLeft;
+    -o-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+    -webkit-animation-delay: .1s;
+    -moz-animation-delay: .1s;
+    -o-animation-delay: .1s;
+    -ms-animation-delay: .1s;
+    animation-delay: .1s;
+}
+#toregister:target ~ #wrapper #login,
+#tologin:target ~ #wrapper #register{
+    -webkit-animation-name: fadeOutLeft;
+    -moz-animation-name: fadeOutLeft;
+    -ms-animation-name: fadeOutLeft;
+    -o-animation-name: fadeOutLeft;
+    animation-name: fadeOutLeft;
+}
+
+/** the actual animation, credit where due : http://daneden.me/animate/ ***/
+.animate{
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+
+    -moz-animation-duration: 0.5s;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: both;
+
+    -o-animation-duration: 0.5s;
+    -o-animation-timing-function: ease;
+    -o-animation-fill-mode: both;
+
+    -ms-animation-duration: 0.5s;
+    -ms-animation-timing-function: ease;
+    -ms-animation-fill-mode: both;
+
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+/********* /login ***************/
+/********** sign in ***************************/
+.login_box{ 
+    padding:20px; 
+    margin: auto;
+}
+
+a{ 
+    text-decoration: none; 
+}
+a:hover{ 
+    text-decoration: underline; 
+}
+.left { 
+    float:left; 
+}
+.alignleft { 
+    float: left; 
+    margin-right: 15px; 
+}
+.alignright { float: right; 
+    margin-left: 15px; 
+}
+.clearfix:after,
+form:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.login_content {
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    color:#fff;
+    /* min-width: 280px; */
+}
+.login_content h1 {
+    font: normal 25px "Quicksand", Arial, sans-serif;
+    letter-spacing: -0.05em;
+    line-height: 20px;
+    margin: 10px 0 30px;
+}
+
+
+.login_content form { position: relative; margin-top: 10vh; }
+
+.inputLogin {
+    color: #fff;
+    margin: 0 0 20px;
+    width: 100%;
+    height: 40px;
+    border-radius: 50px;
+    line-height:40px;
+    font-family: "Quicksand";
+    font-size: 16px;
+    text-indent: 20px;
+    border: none;
+    /* background-color: #000 !important; */
+    background: rgba(0, 0, 0, 0.4);
+}
+.inputLogin:focus {
+    -webkit-box-shadow: 0 0 2px #264348 inset;
+    -moz-box-shadow: 0 0 2px #264348 inset;
+    -ms-box-shadow: 0 0 2px #264348 inset;
+    -o-box-shadow: 0 0 2px #264348 inset;
+    box-shadow: 0 0 2px #264348 inset;
+    /* background-color: #fff; */
+    /* border: 2px solid #264348; */
+    outline: none;
+    color:#fff;
+}
+
+#username { background-position: 10px 10px !important }
+#password { background-position: 10px -53px !important }
+.login_content form div a {
+    font-size: 13px;
+    color:#fff;
+}
+.reset_pass{margin-top:10px !important; margin-right: 125px !important;}
+.login_content div .reset_pass{margin-top: 20px !important; margin-right: 39px; float: right;}
+.separator{
+           margin-top: 10px;
+           padding-top: 10px;}
+
+.login_content form input[type="submit"],#content form .submit{float: left; }
+
+
+#buttonlogin{
+    color:white;
+    font-weight: bold;
+    border: 0;
+    border-radius: 50px;
+    width: 100%;
+    height: 40px;
+    line-height: 30px;
+    font-size: 14px;
+    font-family: "Quicksand";
+
+    background-image: linear-gradient(to right, #FF5534, #F27935, #FF5534, #F27935);
+    /* box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75); */
+
+    background-size: 300% 100%;
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+#buttonlogin:hover{
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+#buttonlogin:focus {
+    outline: none;
+}
+
+#buttonlogin:active{
+  background-color: #ED864C;
+  outline: 0;
+}
+
+.footerLogin{
+    font-family: "Quicksand";
+}
+
+header{
+    width:100%;
+}
+
+/********** end of sign in ********************/
+
+/* Responsive */
+@media screen and (max-width: 1024px){
+    .inputLogin,
+    #buttonlogin{
+        height: 75px;
+        font-size: 25px;
+    }
+    .footerLogin{
+        font-size: 25px;
+    }
+}

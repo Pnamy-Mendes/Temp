@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <div class="modal-title">
+        {{titulo}} Escalão
+    </div>
+</div>
+<div class="modal-body">
+    <form name="FormUser">
+        <input type="hidden" class="form-control" id="input0" ng-model="registo.IDEscalao">
+
+        <div class="form-group">
+            <label class="form-label">Modalidade</label><br>
+            <!--<select ng-model="registo.EscModID" ng-options="modalidade.IDMod as modalidade.Nome for modalidade in modalidades" >
+              <option value="">Modalidade</option>
+            </select>-->
+
+            <span ng-init="registo.EscModID=1; registo.EscMod='Futebol'">
+                <input type="text" class="form-control" ng-model="registo.EscMod" disabled>
+                <input type="hidden" ng-model="registo.EscModID">
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Época</label><br>
+            <select ng-model="registo.EpocaID" ng-options="epoca.IDEpoca as epoca.Nome for epoca in epocas" required>
+                <option value="">Época</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="input1" class="form-label">Escalão</label>
+            <input type="text" class="form-control" id="input1" ng-model="registo.Nome" required>
+        </div>
+
+        <div class="form-group">
+            <label for="input3" class="form-label">Data Inicial</label>
+            <input type="text" datetime="dd-MM-yyyy" datetime-model="dd-MM-yyyy" min="Jan 1, 1975" max="Dec 31, 2050"
+                class="form-control" id="input3" ng-model="registo.DataInicial" required>
+        </div>
+
+        <div class="form-group">
+            <label for="input4" class="form-label">Data Final</label>
+            <input type="text" datetime="dd-MM-yyyy" datetime-model="dd-MM-yyyy" min="Jan 1, 1975" max="Dec 31, 2050"
+                class="form-control" id="input4" ng-model="registo.DataFinal" required>
+        </div>
+        <div class="form-group">
+            <label for="input1" class="form-label">Equipamento Nº Minimo</label>
+            <input type="text" class="form-control" id="input5" ng-model="registo.EquipamentoNrMinimo" required>
+        </div>
+        <div class="form-group">
+            <label for="input1" class="form-label">Equipamento Nº Máximo</label>
+            <input type="text" class="form-control" id="input6" ng-model="registo.EquipamentoNrMaximo" required>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger btn-sm" ng-click="cancel()"><i class="fa fa-times"></i> Fechar</button>
+    <button ng-disabled="FormUser.$invalid" class="btn btn-primary btn-sm" ng-click="ok('Escalao', titulo)"><i
+            class="fa fa-save"></i> Guardar</button>
+</div>

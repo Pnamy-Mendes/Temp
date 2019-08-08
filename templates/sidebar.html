@@ -1,0 +1,29 @@
+<div class="menu sidebar clearfix" ng-class="{'showSidebarOpacity' : sidebarClosed }">
+  <div class="sidebarContents" ng-class="{'showSidebarContents' : sidebarClosed }">
+
+    <ul class="sidebar-panel nav">
+      <li class="sidetitle"></li>
+      <li ui-sref-active="selected"><a ui-sref="home"><span class="icon color5"><i class="fa fa-tachometer"></i></span>Dashboard</a></li>
+      <li ui-sref-active="selected"><a ui-sref="clube"><span class="icon color6"><i class="fa fa-shield"></i></span>Clube</a></li>
+      <li><a ng-click="openmenu()" class="pointer"><span class="icon color7"><i class="fa fa-users"></i></span>Entidades<span class="caret"></span></a>
+        <ul ng-class="showmenu" >
+          <li ui-sref-active="selected"><a ui-sref="atletas">Atletas</a></li>
+          <li ui-sref-active="selected"><a ui-sref="outrasEntidades({tipoEnt: 3})">Diretores</a></li>
+          <li ui-sref-active="selected"><a ui-sref="outrasEntidades({tipoEnt: 2})">Treinadores</a></li>
+          <li ui-sref-active="selected"><a ui-sref="outrasEntidades({tipoEnt: 4})">Outro Staff</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="sidebar-panel nav" ng-if="userRole==='ROLE_ADMIN' || userRole != 'ROLE_USER' ">
+      <div class="adminMenuOpts"  >
+        <li class="sidetitle">Administrador</li>
+        <li ui-sref-active="selected"><a ui-sref="gestaoUsers"><span class="icon"><i class="fa fa-user-plus"></i></span>
+          Utilizadores</a></li>
+        <li ui-sref-active="selected"><a ui-sref="parametrizacao"><span class="icon"><i class="fa fa-wrench"></i></span>
+          Parametrização</a></li>
+      </div>
+    </ul>
+
+  </div>
+</div>

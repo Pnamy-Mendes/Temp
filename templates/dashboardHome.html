@@ -1,0 +1,55 @@
+<div ng-include="'templates/page-header.html'"></div>
+
+<div class="panel">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel">
+
+                <div class="panel-title orange">
+                    Atletas Ativos <span class="pull-right">Total : {{totalAtletas}}</span>
+                </div>
+
+                <div class="panel-body ">
+                    <p><b>Futebol:</b> {{totalAtletasFutebol}} </p>
+                    <p><b>Natação:</b> {{totalAtletasNatacao}} </p>
+                </div>
+            </div>
+
+            <div class="panel">
+
+                <div class="panel-title">
+                    Staff Ativo <span class="pull-right">Total : {{totalStaff}}</span>
+                </div>
+
+                <div class="panel-body ">
+                    <br>
+                    <p><b>Treinadores:</b> {{totalTreinadores}} </p>
+                    <p><b>Diretores:</b> {{totalDiretores}} </p>
+                    <p><b>Outro Staff:</b> {{totalOutroStaff}} </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-8">
+            <div class="panel">
+                <div class="panel-title">
+                    Total de {{tituloEntidade}} por Escalão
+                    <select ng-model="SelectEntidade" ng-change="updateChart(SelectEntidade)" class="pull-right selectStyle input-sm">
+                            <option value="Atletas">Atletas</option>
+                            <option value="Treinadores">Treinadores</option>
+                            <option value="Diretores">Diretores</option>
+                            <option value="Outro Staff">Outro Staff</option>
+                          </select>
+                </div>
+                <div class="panel-body">
+                    <canvas class="chart chart-bar" chart-options="options" chart-colors="colorsChart" chart-data="data" chart-labels="labels" chart-series="series">
+                        </canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>

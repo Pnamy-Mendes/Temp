@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <div class="modal-title">
+        {{titulo}} Modalidade
+    </div>
+</div>
+<div class="modal-body">
+    <form name="FormUser">
+        <input type="hidden" class="form-control" ng-model="registo.IDMod">
+
+        <div class="form-group">
+            <label for="input1" class="form-label">Nome</label>
+            <input type="text" class="form-control" ng-model="registo.Nome" required>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger btn-sm" ng-click="cancel()"><i class="fa fa-times"></i> Fechar</button>
+    <button ng-disabled="FormUser.$invalid" class="btn btn-primary btn-sm" ng-click="ok('Modalidade', titulo)"><i class="fa fa-save"></i> Guardar</button>
+</div>

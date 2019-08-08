@@ -1,0 +1,71 @@
+<div ng-include="'templates/page-header.html'"></div>
+  <div class="panel">
+    <!-- Nav tabs -->
+    <uib-tabset>
+      <uib-tab index="0" heading="Epoca">
+        <form name="FormUser">
+          <input type="hidden" class="form-control" id="input0" ng-model="epoca.IDEpoca">
+          <div class="form-group">
+            <label for="input1" class="form-label">Época</label>
+            <input type="text" class="form-control" id="input1" ng-model="epoca.Nome" required>
+          </div>
+          <div class="form-group">
+            <label for="input3" class="form-label">Data Início</label>
+            <input type="text" datetime="dd-MM-yyyy" datetime-model="dd-MM-yyyy" min="Jan 1, 2000" max="Dec 31, 2050" class="form-control" id="input3" ng-model="epoca.DataInicio" required>
+          </div>
+          <div class="form-group">
+            <label for="input4" class="form-label">Data Fim</label>
+            <input type="text" datetime="dd-MM-yyyy" datetime-model="dd-MM-yyyy" min="Jan 1, 2000" max="Dec 31, 2050" class="form-control" id="input4" ng-model="epoca.DataFim" required>
+          </div>
+          <button ng-disabled="FormUser.$invalid" class="btn btn-primary btn-sm" ng-click="saveEpoca()"><i class="fa fa-save"></i> Guardar</button>
+        </form>
+      </uib-tab>
+
+      <uib-tab index="1" heading="Modos de Pagamento">
+        <div class="row">
+          <div class="col-md-6">
+            <form class="form-inline">
+              <label>Descrição:</label>
+              <input type="text" placeholder="descrição" name="descricao" ng-model="newModo.Descricao" class="form-control input-sm" />
+              <button type="button" class="btn btn-sm btn-primary" ng-click="addModo()">Guardar</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <table class="table table-striped">
+            <thead>
+                <tr><th>id</th><th>modo</th><th>activo</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="modo in epoca.ModosPagamento">
+                <td>{{modo.IDModo}}</td>
+                <td>{{modo.Descricao}}</td>
+                <td><span ng-if="modo.Activo"><i class="fa fa-check color7"></i></span><span ng-if="!modo.Activo"><i class="fa fa-times color10"></i></span></td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-success" ng-click="detailsModo(modo)"><i class="fa fa-money" aria-hidden="true"></i> Pagamentos</button>
+                  <button type="button" class="btn btn-sm btn-primary" ng-click="editModo(modo)"><i class="fa fa-edit"></i> Editar</button>
+                  <button type="button" class="btn btn-sm btn-danger" ng-click="removeModo(modo)"><i class="fa fa-times"></i> Remover</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      </uib-tab>
+    </uib-tabset>
+</div>
+
+<script type="text/ng-template" id="confirmPagamento.html">
+  <div class="modal-header">
+    <h5>Confirmação de alterações</h5>
+  </div>
+    <div class="modal-body" id="modal-body">
+      <p class="text-danger"><strong>Deseja alterar os dados dos pagamentos já associados a entidades?</strong></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-default btn-sm" type="button" ng-click="yes()">Sim</button>
+      <button class="btn btn-warning btn-sm" type="button" ng-click="no()">Não</button>
+      <button class="btn btn-info btn-sm" type="button" ng-click="cancel()">Cancelar</button>
+    </div>
+</script>

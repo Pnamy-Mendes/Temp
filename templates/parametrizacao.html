@@ -1,0 +1,177 @@
+<div ng-include="'templates/page-header.html'"></div>
+
+<div class="panel">
+
+<!-- Nav tabs -->
+  <uib-tabset>
+
+  <!-- TAB CLUBES.......................................................................................... -->
+    <uib-tab index="0" heading="Clubes" ng-init="ent = 'Clube'">
+     <table st-table="clubesCollection" st-safe-src="clubes" class="table table-striped">
+      <thead>
+      <tr>
+        <th colspan="2">
+          <input st-search placeholder="Pesquisa Global" class="input-sm form-control" type="search"/>
+        </th>
+        <th colspan="4">
+            <a ng-click="EditData(clube, 'Clube', 'Novo')" class="btn btn-sm btn-primary float-r"> <i class="fa fa-plus"></i> Adicionar</a>
+        </th>
+      </tr>
+      <tr>
+        <th class="st-icon" st-sort="Nome">Clube</th>
+        <th class="st-icon" st-sort="Abrv">Abrv.</th>
+        <th class="st-icon" st-sort="Cidade">Cidade</th>
+        <th class="st-icon" st-sort="Estadio">Estádio</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+
+        <tr ng-repeat="clube in clubesCollection" ng-if="clube.IDClube!=1">
+          <td> {{clube.Nome}}</td>
+          <td>{{clube.Abrv}}</td>
+          <td>{{clube.Cidade}}</td>
+          <td>{{clube.Estadio}} </td>
+          <td class="userTools"> <button class="btn btn-sm" ng-click="EditData(clube, 'Clube', 'Editar')"><i class="fa fa-edit"></i></button> </td>
+          <td class="userTools"> <button class="btn btn-sm btn-danger" ng-click="deleteData(clube, 'Clube')"><i class="fa fa-trash"></i></button> </td>
+        </tr>
+
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="text-center">
+            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </uib-tab>
+
+  <!-- TAB EPOCAS.................................................................................................... -->
+    <uib-tab index="1" heading="Épocas" >
+      <table st-table="epocasCollection" st-safe-src="epocas" class="table table-striped">
+        <thead>
+        <tr>
+          <th colspan="2">
+            <input st-search placeholder="Pesquisa Global" class="input-sm form-control" type="search"/>
+          </th>
+          <th colspan="4">
+            <a ng-click="EditData(epoca, 'Epoca', 'Nova')" class="btn btn-sm btn-primary float-r"> <i class="fa fa-plus"></i> Adicionar</a>
+          </th>
+        </tr>
+        <tr>
+          <th class="st-icon" st-sort="Nome">Época</th>
+          <th class="st-icon" st-sort="DataInicio">Data Início</th>
+          <th class="st-icon" st-sort="DataFim">Data Fim</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+          <tr ng-repeat="epoca in epocasCollection">
+            <td> {{epoca.Nome}}</td>
+            <td> {{epoca.DataInicio | date: "dd-MM-yyyy"}}</td>
+            <td> {{epoca.DataFim | date: "dd-MM-yyyy"}}</td>
+            <td class="userTools"> <a href="#/parametrizacao/epoca/{{epoca.IDEpoca}}" class="btn btn-sm" ><i class="fa fa-edit"></i> Editar</a> </td>
+            <td class="userTools"> <button class="btn btn-sm btn-danger" ng-click="deleteData(epoca, 'Epoca')"><i class="fa fa-trash"></i> Apagar</button> </td>
+          </tr>
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5" class="text-center">
+              <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </uib-tab>
+
+  <!-- TAB ESCALÕES.................................................................................................. -->
+    <uib-tab index="2" heading="Escalões">
+      <table st-table="escaloesCollection" st-safe-src="escaloes" class="table table-striped">
+        <thead>
+        <tr>
+          <th colspan="3">
+            <input st-search placeholder="Pesquisa Global" class="input-sm form-control" type="search"/>
+          </th>
+          <th colspan="4">
+            <a ng-click="EditData(escalao, 'Escalao', 'Novo')" class="btn btn-sm btn-primary float-r"> <i class="fa fa-plus"></i> Adicionar</a>
+          </th>
+        </tr>
+        <tr>
+          <th class="st-icon" st-sort="EscMod">Modalidade</th>
+          <th class="st-icon" st-sort="Nome">Escalão</th>
+          <th class="st-icon" st-sort="Epoca">Época</th>
+          <th class="st-icon" st-sort="DataInicial">Data Inicial</th>
+          <th class="st-icon" st-sort="DataFinal">Data Final</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+          <tr ng-repeat="escalao in escaloesCollection">
+            <td> {{escalao.EscMod}}</td>
+            <td> {{escalao.Nome}}</td>
+            <td> {{escalao.Epoca}}</td>
+            <td> {{escalao.DataInicial | date: "dd-MM-yyyy"}}</td>
+            <td> {{escalao.DataFinal | date: "dd-MM-yyyy"}}</td>
+            <td class="userTools"> <button class="btn btn-sm" ng-click="EditData(escalao, 'Escalao', 'Editar')"><i class="fa fa-edit"></i> Editar</button> </td>
+            <td class="userTools"> <button class="btn btn-sm btn-danger" ng-click="deleteData(escalao, 'Escalao')"><i class="fa fa-trash"></i> Apagar</button> </td>
+          </tr>
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5" class="text-center">
+              <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </uib-tab>
+
+  <!-- TAB MODALIDADES............................................................................................. -->
+    <uib-tab index="3" heading="Modalidades">
+      <table st-table="modalidadesCollection" st-safe-src="modalidades" class="table table-striped">
+        <thead>
+        <tr>
+          <th colspan="1">
+            <input st-search placeholder="Pesquisa Global" class="input-sm form-control" type="search"/>
+          </th>
+          <th colspan="2">
+            <a ng-click="EditData(modalidade, 'Modalidade', 'Nova')" class="btn btn-sm btn-primary float-r"> <i class="fa fa-plus"></i> Adicionar</a>
+          </th>
+        </tr>
+        <tr>
+          <th class="st-icon" st-sort="Nome">Modalidade</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+          <tr ng-repeat="modalidade in modalidadesCollection">
+            <td>{{modalidade.Nome}}</td>
+            <td class="userTools"> <button class="btn btn-sm" ng-click="EditData(modalidade, 'Modalidade', 'Editar')"><i class="fa fa-edit"></i> Editar</button> </td>
+            <td class="userTools"> <button class="btn btn-sm btn-danger" ng-click="deleteData(modalidade, 'Modalidade')"><i class="fa fa-trash"></i> Apagar</button> </td>
+          </tr>
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5" class="text-center">
+              <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </uib-tab>
+
+
+  </uib-tabset>
+
+</div>
